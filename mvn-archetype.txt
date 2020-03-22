@@ -1,0 +1,1 @@
+mvn archetype:generate -DgroupId=greedyAlgorithms.Dijstra -DartifactId=greedyAlgorithms -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
