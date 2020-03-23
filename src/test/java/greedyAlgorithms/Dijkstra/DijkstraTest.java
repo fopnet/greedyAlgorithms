@@ -1,6 +1,7 @@
 
 package greedyAlgorithms.Dijkstra;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -50,8 +51,13 @@ public class DijkstraTest {
         assertNotNull(path);
         assertTrue(path.size() > 0);
 
-        for (final Vertex vertex : path) {
-            System.out.println(vertex);
+        for (int i = 0; i < path.size(); i++) {
+            assertEquals("Node_0", path.get(0).toString());
+            assertEquals("Node_2", path.get(1).toString());
+            assertEquals("Node_7", path.get(2).toString());
+            assertEquals("Node_9", path.get(3).toString());
+            assertEquals("Node_10", path.get(4).toString());
+            System.out.println(path.get(i));
         }
 
     }
@@ -59,5 +65,52 @@ public class DijkstraTest {
     private void addLane(final String laneId, final int sourceLocNo, final int destLocNo, final int duration) {
         final Edge lane = new Edge(laneId, nodes.get(sourceLocNo), nodes.get(destLocNo), duration);
         edges.add(lane);
+    }
+
+    @Test
+    public void testExcute2() {
+        nodes = new ArrayList<Vertex>();
+        edges = new ArrayList<Edge>();
+        for (int i = 0; i < 9; i++) {
+            final Vertex location = new Vertex("Node_" + i, "Node_" + i);
+            nodes.add(location);
+        }
+
+        addLane("Edge_0", 0, 1, 4);
+        addLane("Edge_0", 0, 7, 8);
+        addLane("Edge_1", 1, 7, 11);
+        addLane("Edge_1", 1, 2, 8);
+        addLane("Edge_2", 2, 8, 2);
+        addLane("Edge_2", 2, 7, 7);
+        addLane("Edge_2", 2, 4, 5);
+        addLane("Edge_3", 3, 5, 14);
+        addLane("Edge_3", 3, 4, 9);
+        addLane("Edge_5", 5, 3, 14);
+        addLane("Edge_6", 6, 8, 6);
+        addLane("Edge_6", 6, 5, 2);
+        addLane("Edge_5", 5, 4, 10);
+        addLane("Edge_7", 7, 6, 1);
+        addLane("Edge_7", 7, 8, 7);
+        addLane("Edge_7", 7, 1, 11);
+        addLane("Edge_8", 8, 6, 6);
+        addLane("Edge_8", 8, 2, 2);
+
+        // Lets check from location Loc_1 to Loc_10
+        final Graph graph = new Graph(nodes, edges);
+        final Dijkstra dijkstra = new Dijkstra(graph);
+        dijkstra.execute(nodes.get(0));
+        final LinkedList<Vertex> path = dijkstra.getPath(nodes.get(4));
+
+        assertNotNull(path);
+        assertTrue(path.size() > 0);
+
+        // for (final Vertex vertex : path) {
+        for (int i = 0; i < path.size(); i++) {
+            assertEquals("Node_0", path.get(0).toString());
+            assertEquals("Node_1", path.get(1).toString());
+            assertEquals("Node_2", path.get(2).toString());
+            assertEquals("Node_4", path.get(3).toString());
+            System.out.println(path.get(i));
+        }
     }
 }

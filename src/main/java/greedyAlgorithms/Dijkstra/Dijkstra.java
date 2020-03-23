@@ -11,24 +11,31 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Dijkstra
+ * Dijkstra's Algorithm is an algorithm for finding the shortest path between
+ * nodes in a graph Time Complexity: O(|V|^2)
+ * 
+ * Dijkstra’s algorithm is a Greedy algorithm and time complexity is O(VLogV)
+ * (with the use of Fibonacci heap). Dijkstra doesn’t work for Graphs with
+ * negative weight edges, Bellman-Ford works for such graphs.
+ * 
+ * Bellman-Ford is also simpler than Dijkstra and suites well for distributed
+ * systems. But time complexity of Bellman-Ford is O(VE), which is more than
+ * Dijkstra.
  */
 public class Dijkstra {
 
-    private final List<Vertex> nodes;
     private final List<Edge> edges;
     private Set<Vertex> settledNodes;
     private Set<Vertex> unSettledNodes;
     private Map<Vertex, Vertex> predecessors;
     private Map<Vertex, Integer> distance;
 
-    public Dijkstra(Graph graph) {
-        // create a copy of the array so that we can operate on this array
-        this.nodes = new ArrayList<Vertex>(graph.getVertexes());
+    public Dijkstra(final Graph graph) {
+        new ArrayList<Vertex>(graph.getVertexes());
         this.edges = new ArrayList<Edge>(graph.getEdges());
     }
 
-    public void execute(Vertex source) {
+    public void execute(final Vertex source) {
         settledNodes = new HashSet<Vertex>();
         unSettledNodes = new HashSet<Vertex>();
         distance = new HashMap<Vertex, Integer>();
@@ -36,16 +43,16 @@ public class Dijkstra {
         distance.put(source, 0);
         unSettledNodes.add(source);
         while (unSettledNodes.size() > 0) {
-            Vertex node = getMinimum(unSettledNodes);
+            final Vertex node = getMinimum(unSettledNodes);
             settledNodes.add(node);
             unSettledNodes.remove(node);
             findMinimalDistances(node);
         }
     }
 
-    private void findMinimalDistances(Vertex node) {
-        List<Vertex> adjacentNodes = getNeighbors(node);
-        for (Vertex target : adjacentNodes) {
+    private void findMinimalDistances(final Vertex node) {
+        final List<Vertex> adjacentNodes = getNeighbors(node);
+        for (final Vertex target : adjacentNodes) {
             if (getShortestDistance(target) > getShortestDistance(node) + getDistance(node, target)) {
                 distance.put(target, getShortestDistance(node) + getDistance(node, target));
                 predecessors.put(target, node);
@@ -55,8 +62,8 @@ public class Dijkstra {
 
     }
 
-    private int getDistance(Vertex node, Vertex target) {
-        for (Edge edge : edges) {
+    private int getDistance(final Vertex node, final Vertex target) {
+        for (final Edge edge : edges) {
             if (edge.getSource().equals(node) && edge.getDestination().equals(target)) {
                 return edge.getWeight();
             }
@@ -64,9 +71,9 @@ public class Dijkstra {
         throw new RuntimeException("Should not happen");
     }
 
-    private List<Vertex> getNeighbors(Vertex node) {
-        List<Vertex> neighbors = new ArrayList<Vertex>();
-        for (Edge edge : edges) {
+    private List<Vertex> getNeighbors(final Vertex node) {
+        final List<Vertex> neighbors = new ArrayList<Vertex>();
+        for (final Edge edge : edges) {
             if (edge.getSource().equals(node) && !isSettled(edge.getDestination())) {
                 neighbors.add(edge.getDestination());
             }
@@ -74,9 +81,9 @@ public class Dijkstra {
         return neighbors;
     }
 
-    private Vertex getMinimum(Set<Vertex> vertexes) {
+    private Vertex getMinimum(final Set<Vertex> vertexes) {
         Vertex minimum = null;
-        for (Vertex vertex : vertexes) {
+        for (final Vertex vertex : vertexes) {
             if (minimum == null) {
                 minimum = vertex;
             } else {
@@ -88,12 +95,12 @@ public class Dijkstra {
         return minimum;
     }
 
-    private boolean isSettled(Vertex vertex) {
+    private boolean isSettled(final Vertex vertex) {
         return settledNodes.contains(vertex);
     }
 
-    private int getShortestDistance(Vertex destination) {
-        Integer d = distance.get(destination);
+    private int getShortestDistance(final Vertex destination) {
+        final Integer d = distance.get(destination);
         if (d == null) {
             return Integer.MAX_VALUE;
         } else {
@@ -105,8 +112,8 @@ public class Dijkstra {
      * This method returns the path from the source to the selected target and NULL
      * if no path exists
      */
-    public LinkedList<Vertex> getPath(Vertex target) {
-        LinkedList<Vertex> path = new LinkedList<Vertex>();
+    public LinkedList<Vertex> getPath(final Vertex target) {
+        final LinkedList<Vertex> path = new LinkedList<Vertex>();
         Vertex step = target;
         // check if a path exists
         if (predecessors.get(step) == null) {
