@@ -8,7 +8,7 @@ import org.junit.Test;
 public class CoinChangeTest {
 
     @Test
-    public void testExcute() {
+    public void testExecute() {
 
         CoinChange cc = new CoinChange();
         cc.insertCoin(1);
