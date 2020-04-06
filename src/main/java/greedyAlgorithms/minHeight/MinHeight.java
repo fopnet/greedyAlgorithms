@@ -1,10 +1,8 @@
 package greedyAlgorithms.minHeight;
     
-import java.io.File;
-import java.io.FileInputStream;
 import java.util.Scanner;
 
-import greedyAlgorithms.Node.Node;
+import greedyAlgorithms.Node.TreeNode;
 
 
 class MinHeight {
@@ -15,7 +13,7 @@ class MinHeight {
     	Node left;
     	Node right;
 	*/
-	public static int height(Node root) {
+	public static int height(TreeNode root) {
         int maxHeightLeft = 0;
         int maxHeightRight = 0;
       	// Write your code here.
@@ -25,7 +23,7 @@ class MinHeight {
          return maxHeightLeft >maxHeightRight ? maxHeightLeft : maxHeightRight;
     }
 
-    public static int heightUtil( Node node, int currentHeight) {
+    public static int heightUtil( TreeNode node, int currentHeight) {
 
         int leftHeight = currentHeight , rightLength = currentHeight;
         if (node.left != null) leftHeight = heightUtil(node.left, currentHeight + 1);
@@ -33,11 +31,11 @@ class MinHeight {
         return leftHeight > rightLength ? leftHeight : rightLength;
     }
 
-	public static Node insert(Node root, int data) {
+	public static TreeNode insert(TreeNode root, int data) {
         if(root == null) {
-            return new Node(data);
+            return new TreeNode(data);
         } else {
-            Node cur;
+            TreeNode cur;
             if(data <= root.data) {
                 cur = insert(root.left, data);
                 root.left = cur;
@@ -54,7 +52,7 @@ class MinHeight {
 
         Scanner scan = new Scanner(System.in);
         int t = scan.nextInt();
-        Node root = null;
+        TreeNode root = null;
         while(t-- > 0) {
             int data = scan.nextInt();
             root = insert(root, data);

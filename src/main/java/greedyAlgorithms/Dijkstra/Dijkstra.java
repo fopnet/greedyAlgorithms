@@ -24,24 +24,33 @@ import java.util.Set;
  */
 public class Dijkstra {
 
-    private final List<Edge> edges;
-    private Set<Vertex> settledNodes;
-    private Set<Vertex> unSettledNodes;
+    protected final List<Edge> edges;
+    protected Set<Vertex> settledNodes;
+    protected Set<Vertex> unSettledNodes;
     private Map<Vertex, Vertex> predecessors;
-    private Map<Vertex, Integer> distance;
+    protected Map<Vertex, Integer> distance;
+    protected Graph graph;
+
+    Integer getWeight(Vertex v) {
+        return this.distance.get(v);
+    }
 
     public Dijkstra(final Graph graph) {
-        new ArrayList<Vertex>(graph.getVertexes());
+        this.graph = graph;
         this.edges = new ArrayList<Edge>(graph.getEdges());
+
+        this.settledNodes = new HashSet<Vertex>();
+        this. unSettledNodes = new HashSet<Vertex>();
+        this.distance = new HashMap<Vertex, Integer>();
+        this.predecessors = new HashMap<Vertex, Vertex>();
+        
     }
 
     public void execute(final Vertex source) {
-        settledNodes = new HashSet<Vertex>();
-        unSettledNodes = new HashSet<Vertex>();
-        distance = new HashMap<Vertex, Integer>();
-        predecessors = new HashMap<Vertex, Vertex>();
         distance.put(source, 0);
         unSettledNodes.add(source);
+
+        settledNodes.add(this.graph.getVertexes().get(0));
         while (unSettledNodes.size() > 0) {
             final Vertex node = getMinimum(unSettledNodes);
             settledNodes.add(node);
@@ -50,19 +59,29 @@ public class Dijkstra {
         }
     }
 
-    private void findMinimalDistances(final Vertex node) {
+    protected void findMinimalDistances(final Vertex node) {
         final List<Vertex> adjacentNodes = getNeighbors(node);
         for (final Vertex target : adjacentNodes) {
-            if (getShortestDistance(target) > getShortestDistance(node) + getDistance(node, target)) {
-                distance.put(target, getShortestDistance(node) + getDistance(node, target));
-                predecessors.put(target, node);
-                unSettledNodes.add(target);
+            int weight = getDistance(node, target);
+
+            if (getShortestDistance(target) > getShortestDistance(node) + weight) {
+                // distance.put(target, getShortestDistance(node) + weight);
+                // predecessors.put(target, node);
+                // unSettledNodes.add(target);
+
+                addDistance(node, target, weight);
             }
         }
 
     }
 
-    private int getDistance(final Vertex node, final Vertex target) {
+    protected void addDistance(Vertex node, Vertex target, int weight) {
+        distance.put(target, getShortestDistance(node) + weight);
+        predecessors.put(target, node);
+        unSettledNodes.add(target);
+    }
+
+    protected int getDistance(final Vertex node, final Vertex target) {
         for (final Edge edge : edges) {
             if (edge.getSource().equals(node) && edge.getDestination().equals(target)) {
                 return edge.getWeight();
@@ -71,7 +90,7 @@ public class Dijkstra {
         throw new RuntimeException("Should not happen");
     }
 
-    private List<Vertex> getNeighbors(final Vertex node) {
+    protected List<Vertex> getNeighbors(final Vertex node) {
         final List<Vertex> neighbors = new ArrayList<Vertex>();
         for (final Edge edge : edges) {
             if (edge.getSource().equals(node) && !isSettled(edge.getDestination())) {
@@ -81,7 +100,7 @@ public class Dijkstra {
         return neighbors;
     }
 
-    private Vertex getMinimum(final Set<Vertex> vertexes) {
+    Vertex getMinimum(final Set<Vertex> vertexes) {
         Vertex minimum = null;
         for (final Vertex vertex : vertexes) {
             if (minimum == null) {
@@ -95,11 +114,11 @@ public class Dijkstra {
         return minimum;
     }
 
-    private boolean isSettled(final Vertex vertex) {
+    protected boolean isSettled(final Vertex vertex) {
         return settledNodes.contains(vertex);
     }
 
-    private int getShortestDistance(final Vertex destination) {
+    protected int getShortestDistance(final Vertex destination) {
         final Integer d = distance.get(destination);
         if (d == null) {
             return Integer.MAX_VALUE;

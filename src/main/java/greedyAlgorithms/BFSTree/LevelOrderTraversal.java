@@ -4,43 +4,43 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-import greedyAlgorithms.Node.Node;
+import greedyAlgorithms.Node.TreeNode;
  
 
 class LevelOrderTraversal {
-    private Queue<Node> queue;
+    private Queue<TreeNode> queue;
 
      LevelOrderTraversal () {
          this.queue = new LinkedList<>();;
      }
 
 
-     void addQueue(Node node) {
+     void addQueue(TreeNode node) {
         if (node != null) this.queue.add(node);
      }
   
-    void traverse(Node root) {
+    void traverse(TreeNode root) {
         queue.add(root);
         // System.out.printf("%d",root.data);
         
         while (!queue.isEmpty()) {
-            Node curr = queue.poll();
+            TreeNode curr = queue.poll();
             System.out.printf("%d ",curr.data);
             addQueue(curr.left);
             addQueue(curr.right);
         }
      }
 	 
-	public static void levelOrder(Node root) {
+	public static void levelOrder(TreeNode root) {
        new LevelOrderTraversal().traverse(root);
     }
 
 
-	public static Node insert(Node root, int data) {
+	public static TreeNode insert(TreeNode root, int data) {
         if(root == null) {
-            return new Node(data);
+            return new TreeNode(data);
         } else {
-            Node cur;
+            TreeNode cur;
             if(data <= root.data) {
                 cur = insert(root.left, data);
                 root.left = cur;
@@ -56,7 +56,7 @@ class LevelOrderTraversal {
         System.setIn(LevelOrderTraversal.class.getResourceAsStream("./input2.txt"));
         Scanner scan = new Scanner(System.in);
         int t = scan.nextInt();
-        Node root = null;
+        TreeNode root = null;
         while(t-- > 0) {
             int data = scan.nextInt();
             root = insert(root, data);
