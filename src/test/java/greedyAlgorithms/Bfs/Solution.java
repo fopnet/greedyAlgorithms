@@ -96,8 +96,7 @@ public class Solution {
          * Enter your code here. Read input from STDIN. Print output to STDOUT. Your
          * class should be named Solution.
          */
-
-        System.setIn(Solution.class.getResourceAsStream("./input.txt"));
+        System.setIn(Solution.class.getResourceAsStream("./" + args[0]));
         Scanner scanner = new Scanner(System.in);
 
         int numberOfQueries = scanner.nextInt();
@@ -109,7 +108,8 @@ public class Solution {
             int numNodes = graphSize[0];
             int numLinks = graphSize[1];
 
-            Solution bfs = new Solution(numNodes);
+            // Solution bfs = new Solution(numNodes);
+            GraphList bfs = new GraphList(numNodes);
 
             for (int line = 0; line < numLinks; line++) {
                 int[] edges = Arrays.stream(scanner.nextLine().split("\\s")).mapToInt(num -> Integer.parseInt(num))
