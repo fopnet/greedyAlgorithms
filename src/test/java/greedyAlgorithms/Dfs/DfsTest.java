@@ -21,7 +21,7 @@ public class DfsTest {
 
         System.out.println("Following is Depth First Traversal " + "(starting from vertex 2)");
 
-        g.DFS(2);
+        g.DFS(2); // 2 -> 0 -> 1 -> 3 
     }
 
 }

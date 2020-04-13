@@ -1,6 +1,13 @@
 
 package greedyAlgorithms.PrimMst;
 
+/**
+ * Prim's Algorithm is a greedy algorithm that finds a minimum spanning tree for
+ * a weighted undirected graph. In other words, Prim's find a subset of edges
+ * that forms a tree that includes every node in the graph
+ * 
+ * Time Complexity: O(|V|^2)
+ */
 class PrimMst {
     // Number of vertices in the graph
     private static final int V = 5;

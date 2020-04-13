@@ -2,12 +2,11 @@ package greedyAlgorithms.BFSTree;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Scanner;
 
 import greedyAlgorithms.Node.TreeNode;
  
 
-class LevelOrderTraversal {
+public class LevelOrderTraversal {
     private Queue<TreeNode> queue;
 
      LevelOrderTraversal () {
@@ -53,17 +52,6 @@ class LevelOrderTraversal {
     }
 
     public static void main(String[] args) {
-        System.setIn(LevelOrderTraversal.class.getResourceAsStream("./input2.txt"));
-        Scanner scan = new Scanner(System.in);
-        int t = scan.nextInt();
-        TreeNode root = null;
-        while(t-- > 0) {
-            int data = scan.nextInt();
-            root = insert(root, data);
-        }
-        scan.close();
-        levelOrder(root);
-        // expected input 1 => 1 2 5 3 6 4
-        // expected input 2 => 1 14 3 15 2 7 4 13 5 10 6 8 11 9 12 
+        
     }	
 }
