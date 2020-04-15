@@ -47,7 +47,7 @@ public class BfsTest {
 
         System.out.println("Following is Breadth First Traversal " + "(starting from vertex 2)");
 
-        g.BFS(2); // -> 2 - 5
+        g.BFS(2); //  2 -> 5
     }
 
     @Test
@@ -78,7 +78,7 @@ public class BfsTest {
 
         System.out.println("Following is Breadth First Traversal " + "(starting from vertex 2)");
 
-        g.BFS(2); // -> 2 - 5
+        g.BFS(2); // -> 2 -> 5
     }
 
     @Test
@@ -94,7 +94,7 @@ public class BfsTest {
 
         System.out.println("Following is Breadth First Traversal " + "(starting from vertex 2)");
 
-        g.BFS(2); // -> 2 - 1 - 5 - 3 - 4
+        g.BFS(2); // -> 2 -> 1 -> 5 -> 3 -> 4
     }
 
     /**
@@ -172,6 +172,26 @@ public class BfsTest {
         System.out.println("ShortestReachTestCase1");
 
         String[] args = { "testCase1.txt" };
-        Solution.main(args);
+        try {
+            Solution.main(args);
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }   
+    
+    /**
+     * https://www.hackerrank.com/challenges/ctci-bfs-shortest-reach/problem BFS:
+     * Shortest Reach in a Graph
+     */
+    @Test
+    public void testShortestReachTestCase5() {
+        System.out.println("ShortestReachTestCase5");
+
+        String[] args = { "testCase5.txt" };
+        try {
+            Solution.main(args);
+        } catch (Exception e) {
+            System.err.println(e);
+        }
     }
 }
