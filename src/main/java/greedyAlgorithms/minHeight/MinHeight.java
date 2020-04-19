@@ -5,7 +5,7 @@ import java.util.Scanner;
 import greedyAlgorithms.Node.TreeNode;
 
 
-class MinHeight {
+public class MinHeight {
 
 	/*
     class Node 
@@ -16,6 +16,7 @@ class MinHeight {
 	public static int height(TreeNode root) {
         int maxHeightLeft = 0;
         int maxHeightRight = 0;
+        if (root == null) return 0;
       	// Write your code here.
          if (root.left != null)   maxHeightLeft = heightUtil(root.left, 1);
          if (root.right != null)  maxHeightRight = heightUtil(root.right, 1);
