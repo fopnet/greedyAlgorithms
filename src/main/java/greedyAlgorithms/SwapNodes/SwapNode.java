@@ -1,7 +1,6 @@
 package greedyAlgorithms.SwapNodes;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -44,8 +43,8 @@ public class SwapNode {
         return root;
     }
 
-    public int[] visit(int h) {
-        return new InOrderSwapVisitor(h, this.nodes).visit(this.root);
+    public int[] visit(int k) {
+        return new InOrderSwapVisitor(k, this.nodes).visit(this.root);
     }
 
 }

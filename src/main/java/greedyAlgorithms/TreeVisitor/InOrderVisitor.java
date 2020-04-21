@@ -14,9 +14,9 @@ public class InOrderVisitor implements Visitor {
         this.observer = null;
     }
 
-    public InOrderVisitor(VisitorObserver observer) {
-        this.observer = observer;
-    }
+    // public InOrderVisitor(VisitorObserver observer) {
+    //     this.observer = observer;
+    // }
 
     @Override
     public int[] visit(TreeNode node) {
@@ -42,6 +42,7 @@ public class InOrderVisitor implements Visitor {
         }
 
         result.add(node.data);
+
 	}
 
     

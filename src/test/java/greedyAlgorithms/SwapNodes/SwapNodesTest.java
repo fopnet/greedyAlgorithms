@@ -34,7 +34,7 @@ public class SwapNodesTest {
         }
     
     }    
-    
+   
     @Test
     public void testInputSample1() {
         System.out.println("inputSample1.txt");
@@ -44,8 +44,23 @@ public class SwapNodesTest {
         } catch (Exception e) {
             System.err.println(e);
         }  finally {
-            System.out.println("\nExpected  14 8 5 9 2 4 13 7 12 1 3 10 15 6 17 11 16");
+            System.out.println("\nExpected 14 8 5 9 2 4 13 7 12 1 3 10 15 6 17 11 16");
             System.out.println("Expected 9 5 14 8 2 13 7 12 4 1 3 17 11 16 6 10 15");
+        }
+    
+    }
+
+    @Test
+    public void testInputSample2() {
+        System.out.println("testInputSample2.txt");
+        try {
+            String[] args = { "inputSample2.txt" };
+            SwapNodesTest.main(args);
+        } catch (Exception e) {
+            System.err.println(e);
+        }  finally {
+            System.out.println("\nExpected 2 9 6 4 1 3 7 5 11 8 10");
+            System.out.println("Expected 2 6 9 4 1 3 7 5 10 8 11");
         }
     
     }
@@ -58,9 +73,9 @@ public class SwapNodesTest {
 
         int[][] result = new int[queries.length][indexes.length];
         for (int i = 0; i < queries.length; i++) {
-            int h = queries[i];
+            int k = queries[i];
 
-            result[i] = swap.visit(h);
+            result[i] = swap.visit(k);
         }
 
         return result;
