@@ -1,8 +1,13 @@
 package greedyAlgorithms.Dijkstra;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 
@@ -17,9 +22,11 @@ public class DPQ {
     private PriorityQueue<Node> pq;
     private int V; // Number of vertices
     List<List<Node>> adj;
+    private Map<Integer, Integer> predecessors;
 
     public DPQ(int V) {
         this.V = V;
+        this.predecessors = new HashMap<>();
         dist = new int[V];
         settled = new HashSet<Integer>();
         pq = new PriorityQueue<Node>(V, new Node());
@@ -69,8 +76,10 @@ public class DPQ {
                 newDistance = dist[u] + edgeDistance;
 
                 // If new distance is cheaper in cost
-                if (newDistance < dist[edge.node])
+                if (newDistance < dist[edge.node]) {
                     dist[edge.node] = newDistance;
+                    predecessors.put(edge.node, u);
+                }
 
                 // Add the current node to the queue
                 pq.add(new Node(edge.node, dist[edge.node]));
@@ -86,16 +95,69 @@ public class DPQ {
             System.out.println(source + " to " + i + " is " + this.dist[i]);
     }
 
-  public void printBFS(int source, int  replaceFrom, int replaceTo) {
+    public void printBFS(int source, int replaceFrom, int replaceTo) {
         for (int i = 0; i < this.dist.length; i++) {
-            if (i == source) continue;
-            if (dist[i] == replaceFrom) dist[i] = replaceTo;
+            if (i == source)
+                continue;
+            if (dist[i] == replaceFrom)
+                dist[i] = replaceTo;
             System.out.print(this.dist[i] + " ");
         }
         System.out.println();
     }
 
-    public DPQ replaceInfiniteTo(int src ,int target) {
+    public void printBFSLetters(int source, int replaceFrom, int replaceTo, int target) {
+        int letterA = 65; // -> A
+
+        char origin = (char) (letterA + source);
+        List<Integer> path = this.getPath(target - 1);
+        for (int i = 0; i < this.dist.length; i++) {
+            if (i == source)
+                continue;
+            if (dist[i] == replaceFrom)
+                dist[i] = replaceTo;
+
+            char destiny = (char) (char) (letterA + i);
+            if (i == target - 1) {
+                for (Iterator<Integer> it = path.iterator(); it.hasNext();) {
+                    destiny = (char) (letterA + it.next());
+
+                    System.out.print(destiny);
+
+                    if (it.hasNext())
+                        System.out.print(" -> ");
+                }
+                System.out.println(" = " + this.dist[i]);
+            } else
+                System.out.println(origin + " -> " + destiny + " = " + this.dist[i] + " ");
+        }
+        System.out.println("============== next query  ");
+        System.out.println();
+
+    }
+
+    /*
+     * This method returns the path from the source to the selected target and NULL
+     * if no path exists
+     */
+    public List<Integer> getPath(final Integer target) {
+        final List<Integer> path = new LinkedList<Integer>();
+        Integer step = target;
+        // check if a path exists
+        if (predecessors.get(step) == null) {
+            return null;
+        }
+        path.add(step);
+        while (predecessors.get(step) != null) {
+            step = predecessors.get(step);
+            path.add(step);
+        }
+        // Put it into the correct order
+        Collections.reverse(path);
+        return path;
+    }
+
+    public DPQ replaceInfiniteTo(int src, int target) {
         this.dist = Arrays.stream(this.dist).map(i -> (src == i ? target : i)).toArray();
         return this;
     }

@@ -70,8 +70,8 @@ public class DijkstraTest {
         final Edge lane = new Edge(laneId, nodes.get(sourceLocNo), nodes.get(destLocNo), duration);
         edges.add(lane);
     }
-
-    @Test
+    
+    @Test 
     public void testExecute2() {
         nodes = new ArrayList<Vertex>();
         edges = new ArrayList<Edge>();
@@ -118,10 +118,17 @@ public class DijkstraTest {
         for (int i = 0; i < path.size(); i++) {
             Vertex v = path.get(i);
             System.out.printf("%s\t\t\t%s\n", v.getId(), dijkstra.getWeight(v));
-            // assertEquals("Node_0", path.get(0).toString());
-            // assertEquals("Node_1", path.get(1).toString());
-            // assertEquals("Node_2", path.get(2).toString());
-            // assertEquals("Node_4", path.get(3).toString());
+            assertEquals("Node_0", path.get(0).toString());
+            assertEquals(0, dijkstra.getWeight(path.get(0)).intValue());
+
+            assertEquals("Node_1", path.get(1).toString());
+            assertEquals(4, dijkstra.getWeight(path.get(1)).intValue());
+
+            assertEquals("Node_2", path.get(2).toString());
+            assertEquals(12, dijkstra.getWeight(path.get(2)).intValue());
+
+            assertEquals("Node_4", path.get(3).toString());
+            assertEquals(17, dijkstra.getWeight(path.get(3)).intValue());
             // System.out.println(path.get(i));
         }
     }
@@ -229,8 +236,7 @@ public class DijkstraTest {
             // connected edges
             List<List<Node>> adj = new ArrayList<List<Node>>();
             for (int i = 0; i < numNodes; i++) {
-                List<Node> item = new ArrayList<Node>();
-                adj.add(item);
+                adj.add(new ArrayList<Node>());
             }
 
             for (int line = 0; line < numLinks; line++) {
@@ -247,6 +253,54 @@ public class DijkstraTest {
             // Calculate the single source shortest path
             DPQ dpq = new DPQ(numNodes);
             dpq.dijkstra(adj, source).printBFS(source, Integer.MAX_VALUE, -1);
+
+        }
+
+        scanner.close();
+    }
+
+    /**
+     * Youtube sample https://www.youtube.com/watch?v=gdmfOwyQlcI
+     * 
+     * Asnwser: weight 11 
+     * path: A, B, D, F
+     */
+    @Test
+    public void youtubeTest() {
+
+        System.setIn(DijkstraTest.class.getResourceAsStream("./youtubeSample.txt"));
+        Scanner scanner = new Scanner(System.in);
+
+        int numberOfQueries = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        for (int tItr = 0; tItr < numberOfQueries; tItr++) {
+            int[] graphSize = Arrays.stream(scanner.nextLine().split("\s")).mapToInt(num -> Integer.parseInt(num))
+                    .toArray();
+            int numNodes = graphSize[0];
+            int numLinks = graphSize[1];
+
+            // Adjacency list representation of the
+            // connected edges
+            List<List<Node>> adj = new ArrayList<List<Node>>();
+            for (int i = 0; i < numNodes; i++) {
+                adj.add(new ArrayList<Node>());
+            }
+
+            for (int line = 0; line < numLinks; line++) {
+                int[] edges = Arrays.stream(scanner.nextLine().split("\s")).mapToInt(num -> Integer.parseInt(num))
+                        .toArray();
+                adj.get(edges[0] - 1).add(new Node(edges[1] - 1, edges[2]));
+            }
+
+            int source = scanner.nextInt() - 1;
+
+            if (scanner.hasNext())
+                scanner.nextLine();
+
+            // Calculate the single source shortest path
+            DPQ dpq = new DPQ(numNodes);
+            dpq.dijkstra(adj, source).printBFSLetters(source, Integer.MAX_VALUE, -1, 6);
 
         }
 
