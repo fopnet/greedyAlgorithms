@@ -4,7 +4,7 @@ package greedyAlgorithms.Dijkstra;
 import java.util.List;
 
 
-public class Graph {
+ class Graph {
     private final List<Vertex> vertexes;
     private final List<Edge> edges;
 
