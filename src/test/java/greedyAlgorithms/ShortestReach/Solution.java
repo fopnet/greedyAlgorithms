@@ -1,9 +1,11 @@
-package greedyAlgorithms.Bfs;
+package greedyAlgorithms.ShortestReach;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Solution {
+import greedyAlgorithms.Graph.GraphList;
+
+class Solution {
 
     public static void main(String[] args) {
         /*

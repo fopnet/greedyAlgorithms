@@ -14,12 +14,12 @@ import java.util.Set;
  * Dijkstra's Algorithm is an algorithm for finding the shortest path between
  * nodes in a graph Time Complexity: O(|V|^2)
  * 
- * Dijkstra’s algorithm is a Greedy algorithm and time complexity is O(VLogV)
+ * Dijkstra’s algorithm is a Greedy algorithm and time complexity is O(V Log V)
  * (with the use of Fibonacci heap). Dijkstra doesn’t work for Graphs with
  * negative weight edges, Bellman-Ford works for such graphs.
  * 
  * Bellman-Ford is also simpler than Dijkstra and suites well for distributed
- * systems. But time complexity of Bellman-Ford is O(VE), which is more than
+ * systems. But time complexity of Bellman-Ford is O(V * E), which is more than
  * Dijkstra.
  */
 public class Dijkstra {

@@ -3,6 +3,8 @@ package greedyAlgorithms.FindRunningMedian;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import greedyAlgorithms.SortedList.SortedList;
+
 
 /**
  * FindRunningMedian

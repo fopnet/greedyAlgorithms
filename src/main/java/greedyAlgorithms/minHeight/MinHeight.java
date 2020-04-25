@@ -1,7 +1,5 @@
-package greedyAlgorithms.minHeight;
+package greedyAlgorithms.MinHeight;
     
-import java.util.Scanner;
-
 import greedyAlgorithms.Node.TreeNode;
 
 
@@ -32,35 +30,6 @@ public class MinHeight {
         return leftHeight > rightLength ? leftHeight : rightLength;
     }
 
-	public static TreeNode insert(TreeNode root, int data) {
-        if(root == null) {
-            return new TreeNode(data);
-        } else {
-            TreeNode cur;
-            if(data <= root.data) {
-                cur = insert(root.left, data);
-                root.left = cur;
-            } else {
-                cur = insert(root.right, data);
-                root.right = cur;
-            }
-            return root;
-        }
-    }
+	
 
-    public static void main(String[] args) throws Exception {
-        System.setIn(MinHeight.class.getResourceAsStream("./input.txt"));
-
-        Scanner scan = new Scanner(System.in);
-        int t = scan.nextInt();
-        TreeNode root = null;
-        while(t-- > 0) {
-            int data = scan.nextInt();
-            root = insert(root, data);
-        }
-        scan.close();
-        int height = height(root);
-        System.out.println("Tree height is " + height);
-        // expected 3
-    }
 }

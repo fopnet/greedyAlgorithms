@@ -50,8 +50,5 @@ public class LevelOrderTraversal {
             return root;
         }
     }
-
-    public static void main(String[] args) {
-        
-    }	
+ 
 }
