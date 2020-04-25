@@ -1,4 +1,4 @@
-package greedyAlgorithms.Trie;
+package greedyAlgorithms.Contact;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -11,11 +11,14 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
-public class TrieTest {
+import greedyAlgorithms.Trie.TrieMap;
+import greedyAlgorithms.Trie.TrieTree;
+
+public class ContactTest {
 
     @Test
     public void testContact() {
-        ContactTree c = new ContactTree();
+        TrieTree c = new TrieTree();
 
         c.add("Felipe");
 
@@ -26,7 +29,7 @@ public class TrieTest {
 
     @Test
     public void testFindOccurs() {
-        ContactTree c = new ContactTree();
+        TrieTree c = new TrieTree();
 
         c.add("Felipe");
         c.add("Felipeta");
@@ -36,7 +39,7 @@ public class TrieTest {
 
     @Test
     public void testSampleTestCase() {
-        ContactTree c = new ContactTree();
+        TrieTree c = new TrieTree();
 
         c.add("hack");
         c.add("hackerrank");
@@ -47,7 +50,7 @@ public class TrieTest {
    
     @Test
     public void testSampleTestCaseMap() {
-        ContactMap c = new ContactMap();
+        TrieMap c = new TrieMap();
 
         c.add("hack");
         c.add("hackerrank");
@@ -62,7 +65,7 @@ public class TrieTest {
 
         String[] args = { "input.txt" };
         try {
-            TrieTest.main(args);
+            ContactTest.main(args);
         } catch (Exception e) {
             System.err.println(e);
         } finally {
@@ -78,7 +81,7 @@ public class TrieTest {
 
         String[] args = { "input1.txt" };
         try {
-            TrieTest.main(args);
+            ContactTest.main(args);
         } catch (Exception e) {
             System.err.println(e);
         }
@@ -90,14 +93,14 @@ public class TrieTest {
 
         String[] args = { "input2.txt" };
         try {
-            TrieTest.main(args);
+            ContactTest.main(args);
         } catch (Exception e) {
             System.err.println(e);
         }
     }
     
     public static void main(String[] args) throws IOException {
-        System.setIn(TrieTest.class.getResourceAsStream("./" + args[0]));
+        System.setIn(ContactTest.class.getResourceAsStream("./" + args[0]));
         Scanner scanner = new Scanner(System.in);
         // BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
@@ -139,7 +142,7 @@ public class TrieTest {
          */
         List<Integer> result = new ArrayList<Integer>(queries.length / 2);
 
-        ContactMap c = new ContactMap();
+        TrieMap c = new TrieMap();
         for (int l = 0; l < queries.length; l++) {
             String[] line = queries[l];
             switch (line[0].toLowerCase()) {
