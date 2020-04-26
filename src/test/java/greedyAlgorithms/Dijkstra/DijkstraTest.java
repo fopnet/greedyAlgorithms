@@ -275,7 +275,7 @@ public class DijkstraTest {
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
         for (int tItr = 0; tItr < numberOfQueries; tItr++) {
-            int[] graphSize = Arrays.stream(scanner.nextLine().split("\s")).mapToInt(num -> Integer.parseInt(num))
+            int[] graphSize = Arrays.stream(scanner.nextLine().split("\\s")).mapToInt(num -> Integer.parseInt(num))
                     .toArray();
             int numNodes = graphSize[0];
             int numLinks = graphSize[1];
@@ -288,7 +288,7 @@ public class DijkstraTest {
             }
 
             for (int line = 0; line < numLinks; line++) {
-                int[] edges = Arrays.stream(scanner.nextLine().split("\s")).mapToInt(num -> Integer.parseInt(num))
+                int[] edges = Arrays.stream(scanner.nextLine().split("\\s")).mapToInt(num -> Integer.parseInt(num))
                         .toArray();
                 adj.get(edges[0] - 1).add(new Node(edges[1] - 1, edges[2]));
             }
