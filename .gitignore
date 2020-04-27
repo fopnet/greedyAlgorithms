@@ -3,6 +3,7 @@
 .DS_Store
 target
 AwsID.txt
+awsAssets
 
 # Log file
 *.log
