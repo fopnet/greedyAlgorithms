@@ -9,6 +9,16 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
+/**
+ * Amazon plans to open Amazon Go stores downtown in the city of Techlandia.
+ * Downtown Techlandia consists of city blocks, represented as a grid of M*N
+ * blocks. Each block represents either building denoted by 1 or open land area
+ * denoted by 0. 
+ * Adjacent blocks with value lare considered clusters of buildings.
+ * Diagonal blocks with value1 are not considered part of the same cluster.
+ * Amazon plans to have an Amazon Go store in each cluster of buildings.
+ * 
+ */
 public class AmazonGoStores2 {
 
     class Coord {

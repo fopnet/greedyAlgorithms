@@ -2,9 +2,19 @@ package greedyAlgorithms.AssessmentTraining;
 
 import java.util.Arrays;
 
-// SOME CLASSES WITHIN A PACKAGE MAY BE RESTRICTED
-// DEFINE ANY CLASS AND METHOD NEEDED
-// CLASS BEGINS, THIS CLASS IS REQUIRED
+/**
+ * The greatest common divisor (GCD), also called highest common factor (HCF) of
+ * N numbers is the largest positive integer that divides all numbers without
+ * giving a remainder. 
+ * 
+ * Write an algorithm to determine the GCD of N positive
+ * integers. Input The input to the function/method consists of two arguments -
+ * num, an integer representing the number of positive integers (N). arr, a list
+ * of positive integers. Output Return an integer representing the GCD of the
+ * given positive integers. Example Input: num = 5 arr = [2, 4, 6, 8, 10]
+ * Output: 2
+ * 
+ */
 public class Mdc {
     // METHOD SIGNATURE BEGINS, THIS METHOD IS REQUIRED
     public int generalizedGCD(int num, int[] arr) {
@@ -22,7 +32,7 @@ public class Mdc {
         // return greatest;
         int prod = getProd(arr);
         // return Arrays.stream(arr).reduce(prod, (a, b) -> mdc(a, b));
-        return Arrays.stream(arr).map(i -> mdc(prod,i)).min().orElse(0);
+        return Arrays.stream(arr).map(i -> mdc(prod, i)).min().orElse(0);
 
     }
 
