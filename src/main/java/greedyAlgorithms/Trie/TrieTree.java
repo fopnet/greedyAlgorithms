@@ -2,6 +2,14 @@ package greedyAlgorithms.Trie;
 
 import greedyAlgorithms.Node.TriNode;
 
+/**
+* https://en.wikipedia.org/wiki/Trie
+* 
+* T9 Algorithm/Word Trie
+A Trie is a multiway tree that can be used to store dictionaries. There are several uses for this data structure. One of them is the word completion look up that most cell phone text message applications use. 
+* This was originally used for the T9 algorithm for supporting SMS text messaging on numeric pad phones.
+* http://bearcave.com/software/java/t9/index.html
+*/
 public class TrieTree {
     private TriNode trie;
 
